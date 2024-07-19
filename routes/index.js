@@ -1,23 +1,19 @@
-var utils = require('../utils');
-var mongoose = require('mongoose');
-var Todo = mongoose.model('Todo');
-var User = mongoose.model('User');
-// TODO:
-var hms = require('humanize-ms');
-var ms = require('ms');
-var streamBuffers = require('stream-buffers');
-var readline = require('readline');
-var moment = require('moment');
-var exec = require('child_process').exec;
-var validator = require('validator');
+const utils = require('../utils');
+const mongoose = require('mongoose');
+const hms = require('humanize-ms');
+const ms = require('ms');
+const streamBuffers = require('stream-buffers');
+const readline = require('readline');
+const moment = require('moment');
+const { exec } = require('child_process');
+const validator = require('validator');
+const fileType = require('file-type');
+const AdmZip = require('adm-zip');
+const fs = require('fs');
+const _ = require('lodash');
 
-// zip-slip
-var fileType = require('file-type');
-var AdmZip = require('adm-zip');
-var fs = require('fs');
-
-// prototype-pollution
-var _ = require('lodash');
+const Todo = mongoose.model('Todo');
+const User = mongoose.model('User');
 
 exports.index = function (req, res, next) {
   Todo.
